@@ -34,11 +34,7 @@ public class GameManager : MonoBehaviour
     }
     
     public virtual void Start()
-    {
-        // Set the target framerate to 60 and disable vsync; we dont need 800 fps
-        Application.targetFrameRate = 60;
-        QualitySettings.vSyncCount = 0;
-        
+    {        
         for (int index = 0; index < pipes.Length; index++)
         {
             if (index == 0) continue;
