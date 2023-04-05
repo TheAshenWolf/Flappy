@@ -35,6 +35,10 @@ public class GameManager : MonoBehaviour
     
     public virtual void Start()
     {
+        // Set the target framerate to 60 and disable vsync; we dont need 800 fps
+        Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 0;
+        
         for (int index = 0; index < pipes.Length; index++)
         {
             if (index == 0) continue;
@@ -47,7 +51,7 @@ public class GameManager : MonoBehaviour
     
     public virtual void Update()
     {
-        // if the game hasnt started yet or already ended, dont move anything
+        // if the game hasn't started yet or already ended, dont move anything
         if (!gameStarted || gameEnded) return;
         
         // Handle ground
@@ -83,6 +87,7 @@ public class GameManager : MonoBehaviour
     
     public virtual void RestartGame()
     {
+        // This is the fastest way to restart the game, since we are not keeping any data between scenes
         SceneManager.LoadScene(0);
     }
     

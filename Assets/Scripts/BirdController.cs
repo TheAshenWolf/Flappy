@@ -10,7 +10,7 @@ public class BirdController : MonoBehaviour
     public virtual void StartGame()
     {
         gameManager.gameStarted = true;
-        birdRigidbody.isKinematic = false;
+        birdRigidbody.isKinematic = false; 
     }
 
     // Update is called once per frame
