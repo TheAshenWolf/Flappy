@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class GameManager : MonoBehaviour
     
     [Header("UI")]
     public TextMeshProUGUI pointsText;
+    public GameObject endGameScreen;
+    public TextMeshProUGUI highScoreText;
     
     [Header("Settings")]
     public float speed = 2f;
@@ -19,9 +22,13 @@ public class GameManager : MonoBehaviour
     
     [Header("Data")]
     public int points = 0;
-
+    public bool gameEnded = false;
+    public bool gameStarted = false;
+    
+    
     public virtual void AddPoints(int amount = 1)
     {
+        if (gameEnded) return;
         points += amount;
         pointsText.text = points.ToString();
     }
@@ -40,14 +47,17 @@ public class GameManager : MonoBehaviour
     
     public virtual void Update()
     {
+        // if the game hasnt started yet or already ended, dont move anything
+        if (!gameStarted || gameEnded) return;
+        
         // Handle ground
         foreach (Transform groundTransform in ground)
         {
-            groundTransform.localPosition += Vector3.left * (Time.deltaTime * speed);
-            if (!(groundTransform.localPosition.x < -14f)) continue;
-            Vector3 position = groundTransform.localPosition;
-            position-= Vector3.left * 30f;
-            groundTransform.localPosition = position;
+            groundTransform.position += Vector3.left * (Time.deltaTime * speed);
+            if (!(groundTransform.position.x < -16f)) continue;
+            Vector3 position = groundTransform.position;
+            position-= Vector3.left * 32f;
+            groundTransform.position = position;
         }
         
         // Handle pipes
@@ -61,9 +71,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void GameOver()
+    public virtual void GameOver()
     {
-        Debug.Log("Game Over");
+        gameEnded = true;
+        
+        // Overwrite the high score if the current score is higher
+        PlayerPrefs.SetInt("highScore", Mathf.Max(PlayerPrefs.GetInt("highScore", 0), points));
+        endGameScreen.gameObject.SetActive(true);
+        highScoreText.text = "High Score: " + PlayerPrefs.GetInt("highScore", 0);
+    }
+    
+    public virtual void RestartGame()
+    {
+        SceneManager.LoadScene(0);
     }
     
 #if UNITY_EDITOR
