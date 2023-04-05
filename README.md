@@ -1,6 +1,6 @@
 # Modding Playground: Flappy Bird
 
-![Unity 2022.2.11](https://img.shields.io/badge/Unity-2022.2.11-blue)
+![Unity 2022.2.11](https://img.shields.io/badge/Unity-2022.2.11-blue) [![Itch Io](https://img.shields.io/badge/-Itch%20IO-red)](https://theashenwolf.itch.io/modding-playground-flappy-bird)
 
 This project was created as a practice playground for Harmony Patch. It is a simple Flappy Bird clone. 
 Why should you pick this implementation instead of any other?
