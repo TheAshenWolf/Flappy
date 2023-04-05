@@ -7,7 +7,6 @@ Why should you pick this implementation instead of any other?
 
 - Game contains a Release build, but is open source, so you can check the original source, in case you get lost
 - It is made with modding in mind, meaning it contains no `private` or `protected` methods / variables, so you can easily patch them
-- Build with Mono for easy decompilation
 - The code is simple
 - Unlike many other implementations, it works
 
